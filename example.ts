@@ -13,7 +13,7 @@ class Example {
     }
 
     async main() {
-        const solIn = 0.0001; // Example value, adjust as needed
+        const solIn = 0.005; // Example value, adjust as needed
         const slippageDecimal = 0.25; // Example value, adjust as needed
         const tokenBalance = 1000; // Example value, adjust as needed
 
@@ -22,7 +22,7 @@ class Example {
             await pumpFunBuy(this.transactionMode, this.payerPrivateKey, this.mintAddress, solIn, slippageDecimal);
 
             // Call the sell function
-            await pumpFunSell(this.transactionMode, this.payerPrivateKey, this.mintAddress, tokenBalance, slippageDecimal);
+            // await pumpFunSell(this.transactionMode, this.payerPrivateKey, this.mintAddress, tokenBalance, slippageDecimal);
         } catch (error) {
             console.error('Error in main function:', error);
         }
@@ -30,9 +30,9 @@ class Example {
 }
 
 // Usage
-const privateKey = 'your_private_key'; // Replace with your actual private key
-const mintAddress = 'your_token_mint_address'; //Replace with actual token mint address
-const txMode = TransactionMode.Simulation; //Set to simulate to test, Execution to perform
+const privateKey = ''; // Replace with your actual private key
+const mintAddress = '9kEsyCdaP9oJsXg9kAbZD4ajMYxhhdx1KSfBpHktiF84'; //Replace with actual token mint address
+const txMode = TransactionMode.Execution; //Set to simulate to test, Execution to perform
 
 const example = new Example(privateKey,mintAddress, txMode);
 example.main();

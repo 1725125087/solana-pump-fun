@@ -8,7 +8,7 @@ import { GLOBAL, FEE_RECIPIENT, SYSTEM_PROGRAM_ID, RENT, PUMP_FUN_ACCOUNT, PUMP_
 export async function pumpFunBuy(transactionMode: TransactionMode, payerPrivateKey: string, mintStr: string, solIn: number, slippageDecimal: number = 0.25) {
     try {
         const connection = new Connection(
-            clusterApiUrl("mainnet-beta"),
+            'https://quaint-alien-moon.solana-mainnet.quiknode.pro/a51d4c1cb71aa990e240971110e8657cf1c75dc5/',
             'confirmed'
         );
 
@@ -72,19 +72,21 @@ export async function pumpFunBuy(transactionMode: TransactionMode, payerPrivateK
             { pubkey: PUMP_FUN_PROGRAM, isSigner: false, isWritable: false },
         ];
 
+        
         const data = Buffer.concat([
             bufferFromUInt64("16927863322537952870"),
             bufferFromUInt64(tokenOut),
             bufferFromUInt64(maxSolCost)
         ]);
-
+        console.log(maxSolCost);
         const instruction = new TransactionInstruction({
             keys: keys,
             programId: PUMP_FUN_PROGRAM,
             data: data
         });
         txBuilder.add(instruction);
-
+        console.log("111111111111111");
+        
         const transaction = await createTransaction(connection, txBuilder.instructions, payer.publicKey);
         if (transactionMode == TransactionMode.Execution) {
             const signature = await sendAndConfirmTransactionWrapper(connection, transaction, [payer]);
